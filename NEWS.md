@@ -58,3 +58,53 @@
 - Cleaned up documentation and fixed formatting for clarity.
 - Updated vignettes titles to ensure consistency between YAML and `\VignetteIndexEntry`.
 
+## correspondenceTables 0.10.29
+----------------------------
+
+New features
+~~~~~~~~~~~~
+* Added `correspondenceList()` to list available correspondence tables in CELLAR and FAO,
+  with a structured output and improved robustness against malformed SPARQL responses.
+
+* Extended `classificationList()` with:
+  - `endpoint` ("CELLAR", "FAO", "ALL")
+  - `showQuery` to return SPARQL queries.
+  Now supports offline mode via `options(useLocalDataForVignettes = TRUE)` using
+  bundled CSV files for reproducible vignette builds and offline work.
+
+Improvements and API changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* `correctionClassification()`:
+  - Added new `prefix` argument to enable prefix-specific corrections.
+  - Replaced SPARQL example with static demo data (`inst/extdata/Nace2.csv`) so
+    that examples work offline and during CRAN checks.
+  - Documentation enhanced with clearer input/output description.
+
+* `lengthsFile()`:
+  - Improved detection of inconsistent code lengths across levels.
+  - More explicit warnings when code hierarchies do not behave as expected.
+
+* `retrieveClassificationTable()`:
+  - Cleaned all non-ASCII characters in comments and messages.
+  - Strengthened error handling when SPARQL queries fail or return unexpected
+    number of columns.
+  - Added explicit imports for `utils::capture.output` and `utils::str`.
+
+Quality control module
+~~~~~~~~~~~~~~~~~~~~~~
+* `classificationQC()` functionality has been temporarily disabled for this
+  release (tests skipped), but its supporting imports (`stringr`, `tools`) remain
+  in place for the upcoming version.
+
+Testing improvements
+~~~~~~~~~~~~~~~~~~~~
+* Added new unit tests for:
+  - `dataStructure()` : validation of returned level/size structure.
+  - `prefixList()` : consistency of prefix extraction for each endpoint.
+  - `retrieveCorrespondenceTable()` : correct parsing, duplicate checks, error handling.
+  - `retrieveClassificationTable()` : correct structure, column naming, error detection.
+
+* Updated existing tests for:
+  - `analyseCorrespondenceTable()` : better handling of missing files, mismatches,
+    duplicates, and filtering options.
+  - `aggregateCorrespondenceTable()` : improved robustness when validating AB tables.

@@ -26,7 +26,7 @@ This value must correspond to the \code{Prefix} column returned by
 \code{\link{classificationEndpoint}} for the chosen scheme, and it is
 used in the query to:
 \itemize{
-  \item build the \code{PREFIX} declaration (via \code{\link{prefixList}}),
+  \item build the \code{PREFIX} declaration (\code{prefixList}),
   \item qualify the scheme and its members
         (e.g. \code{prefix:conceptScheme}, \code{prefix:SomeMember}).
 }}
@@ -100,6 +100,5 @@ for (i in seq_len(nrow(list_data))) {
 }
 \seealso{
 \code{\link{classificationEndpoint}},
-\code{\link{prefixList}},
 \code{\link{retrieveClassificationTable}}.
 }

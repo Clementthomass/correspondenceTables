@@ -2,30 +2,56 @@
 % Please edit documentation in R/correctionClassification.R
 \name{correctionClassification}
 \alias{correctionClassification}
-\title{Retrieve classification table from CELLAR and FAO repositories.}
+\title{Apply basic correction rules to a raw classification table}
 \usage{
-correctionClassification(classification)
+correctionClassification(classification, prefix)
 }
 \arguments{
-\item{classification}{it returns a dataframe with two columns corrected according to the classification of CELLAR & FAO.}
+\item{classification}{A data.frame containing at least two columns:
+\strong{Code} (any name is accepted; assumed to be column 1)
+and \strong{Label} (column 2), representing a raw classification.}
+
+\item{prefix}{Character scalar indicating the classification prefix
+(e.g. `"nace2"`, `"cpa21"`, `"cn2022"`).  
+This determines which correction rules are applied.}
 }
 \value{
-\code{correctionClassification()} returns a table with information needed to retrieve the classification table:
- \itemize{
-   \item Classification Code name (e.g. nace2): the code of each object
-   \item Classification Label:  corresponding name of each object
- }
+A corrected data.frame with the same structure as the input but where
+prefix-specific inconsistencies have been fixed.  
+
+The table typically includes:
+\itemize{
+  \item \strong{Code} – Cleaned and normalised classification code.
+  \item \strong{Label} – Corresponding English label or preferred term.
+}
 }
 \description{
-The aim of this function is to provide a table showing the different codes and labels for each classification
+This function applies a set of prefix-specific correction rules to a
+classification table retrieved from CELLAR or FAO, or read locally
+from `inst/extdata`.  
+ 
+It ensures consistent formatting of codes, removes known anomalies,
+and prepares the table for downstream processing (e.g. creation of
+correspondence tables, QC, SPARQL reconstruction, length detection).
 }
 \examples{
-{
-prefix = "nace2"
-conceptScheme = "nace2"
-endpoint = "CELLAR"
-classification = retrieveClassificationTable(prefix, endpoint, conceptScheme, level="ALL")$ClassificationTable
-correct_classification = correctionClassification(classification)
-View(correct_classification)
+# Example: correct a local NACE2 classification table (no SPARQL, static data)
+
+nace2_path <- system.file(
+  "extdata", "Nace2.csv",
+  package = "correspondenceTables"
+)
+
+# Only run the example if the demo file is present
+if (file.exists(nace2_path)) {
+
+  nace2_raw <- read.csv(nace2_path, stringsAsFactors = FALSE)
+
+  nace2_corrected <- correctionClassification(
+    classification = nace2_raw,
+    prefix         = "nace2"
+  )
+
+  head(nace2_corrected)
 }
 }

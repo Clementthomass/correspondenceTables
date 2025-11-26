@@ -28,7 +28,7 @@ with the targeted classification scheme.
 This value should match the \code{Prefix} column returned by
 \code{\link{classificationEndpoint}} and is required to build:
 \itemize{
-  \item the \code{PREFIX} declarations (via \code{\link{prefixList}}),
+  \item the \code{PREFIX} declarations (via \code{prefixList}),
   \item the fully-qualified scheme name (e.g. \code{prefix:conceptScheme}).
 }}
 
@@ -78,8 +78,8 @@ If \code{showQuery = TRUE} (default), returns a list with:
 If \code{showQuery = FALSE}, only the classification table is returned.
 }
 \description{
-Retrieves a full classification table — codes, labels, hierarchical
-relationships, and associated notes — from the CELLAR or FAO SPARQL
+Retrieves a full classification table codes, labels, hierarchical
+relationships, and associated notes from the CELLAR or FAO SPARQL
 repositories.  
 The function supports optional filtering by hierarchical level and
 automatic use of local embedded data for vignette building.
@@ -98,7 +98,7 @@ Behaviour depends on the global option
         the function:
         \itemize{
           \item builds SPARQL prefix declarations via
-                \code{\link{prefixList}},
+                \code{prefixList},
           \item calls \code{\link{dataStructure}} to determine level
                 availability and adjust \code{level} when necessary,
           \item constructs and submits a SPARQL query to the selected
@@ -144,7 +144,6 @@ Clear, user-friendly errors are raised if:
 
 }
 \seealso{
-\code{\link{classificationEndpoint}},  
-\code{\link{prefixList}},  
+\code{\link{classificationEndpoint}},
 \code{\link{dataStructure}}
 }

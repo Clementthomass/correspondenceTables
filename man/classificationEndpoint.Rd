@@ -76,7 +76,6 @@ In case of network errors or invalid responses:
 
 }
 \seealso{
-\code{\link{prefixList}}  
 \code{\link{dataStructure}}  
 \code{\link{retrieveClassificationTable}}
 }

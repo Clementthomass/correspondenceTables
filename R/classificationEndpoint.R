@@ -54,7 +54,6 @@
 #' }
 #'
 #' @seealso
-#' \code{\link{prefixList}}  
 #' \code{\link{dataStructure}}  
 #' \code{\link{retrieveClassificationTable}}
 #'

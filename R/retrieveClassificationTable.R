@@ -1,8 +1,8 @@
 #' @title Retrieve a classification table from CELLAR or FAO
 #'
 #' @description
-#' Retrieves a full classification table — codes, labels, hierarchical
-#' relationships, and associated notes — from the CELLAR or FAO SPARQL
+#' Retrieves a full classification table codes, labels, hierarchical
+#' relationships, and associated notes from the CELLAR or FAO SPARQL
 #' repositories.  
 #' The function supports optional filtering by hierarchical level and
 #' automatic use of local embedded data for vignette building.
@@ -19,7 +19,7 @@
 #'   This value should match the \code{Prefix} column returned by
 #'   \code{\link{classificationEndpoint}} and is required to build:
 #'   \itemize{
-#'     \item the \code{PREFIX} declarations (via \code{\link{prefixList}}),
+#'     \item the \code{PREFIX} declarations (via \code{prefixList}),
 #'     \item the fully-qualified scheme name (e.g. \code{prefix:conceptScheme}).
 #'   }
 #'
@@ -72,7 +72,7 @@
 #'         the function:
 #'         \itemize{
 #'           \item builds SPARQL prefix declarations via
-#'                 \code{\link{prefixList}},
+#'                 \code{prefixList},
 #'           \item calls \code{\link{dataStructure}} to determine level
 #'                 availability and adjust \code{level} when necessary,
 #'           \item constructs and submits a SPARQL query to the selected
@@ -127,8 +127,7 @@
 #' }
 #'
 #' @seealso
-#' \code{\link{classificationEndpoint}},  
-#' \code{\link{prefixList}},  
+#' \code{\link{classificationEndpoint}},
 #' \code{\link{dataStructure}}
 #'
 #' @import httr
@@ -214,7 +213,7 @@ retrieveClassificationTable = function(endpoint,
         stop(simpleError(
           paste(
             "Error in function retrieveClassificationTable:",
-            "building of the SPARQL query failed –",
+            "building of the SPARQL query failed",
             endpoint, "is not available or is returning unexpected data."
           )
         ))
@@ -253,7 +252,7 @@ retrieveClassificationTable = function(endpoint,
           )
         ))
       }
-      # level == "ALL" → we proceed without level filter
+      # level == "ALL" we proceed without level filter
     }
     
     # ---- Case B: classification HAS levels & level != ALL ----
@@ -359,7 +358,8 @@ retrieveClassificationTable = function(endpoint,
         
       }, error = function(e) {
         cat("The following SPARQL code was used in the call:\n", SPARQL.query, "\n")
-        cat("The following response was given by the SPARQL call:\n", response, "\n")
+        message("The following response was given by the SPARQL call:")
+        message(paste(capture.output(str(response)), collapse = "\n"))
         stop(simpleError(
           "Error in function retrieveClassificationTable, SPARQL query execution failed."
         ))
